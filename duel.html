@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html style="width: 100%; height: 100%">
     <body style="width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden">
-        <div id="leftPlayer" style="overflow: hidden; height: 100%; width: 50%; float: left" height="100%" width="49%">Left Div</div>
-        <div id="rightPlayer" style="overflow: hidden; height: 100%; width: 50%; float: right" height="100%" width="49%">Right Div</div>
+        <div id="leftPlayer" style="overflow: hidden; height: 100%; width: 50%; float: left" height="100%" width="49%">Loading left video...</div>
+        <div id="rightPlayer" style="overflow: hidden; height: 100%; width: 50%; float: right" height="100%" width="49%">Loading right video...</div>
 
         <script>
             var tag = document.createElement('script')
@@ -18,6 +18,10 @@
                         'onReady': onPlayerReady
                     }
                 })
+                setTimeout(loadSecondVideo, 7000)
+            }
+
+            function loadSecondVideo() {
                 rightPlayer = new YT.Player('rightPlayer', {
                     videoId: 'fwKf6W5jJ54',
                     events: {
