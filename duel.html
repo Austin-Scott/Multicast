@@ -2,7 +2,8 @@
 <html style="width: 100%; height: 100%">
     <body style="width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden">
         <div id="leftPlayer" style="overflow: hidden; resize: horizontal; height: 100%; width: 66.66%; float: left" height="100%" width="66.66%">Loading left video...</div>
-        <div id="rightPlayer" style="overflow: hidden; height: 100%; width: 33.33%; float: right" height="100%" width="33.33%">Loading right video...</div>
+        <div id="rightUpPlayer" style="overflow: hidden; height: 50%; width: 33.33%; float: right" height="50%" width="33.33%">Loading right video...</div>
+        <div id="rightDownPlayer" style="overflow: hidden; height: 50%; width: 33.33%; float: right" height="50%" width="33.33%">Loading right video...</div>
 
         <script>
             var tag = document.createElement('script')
@@ -10,15 +11,22 @@
             var firstScriptTag = document.getElementsByTagName('script')[0]
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
             var leftPlayer
-            var rightPlayer
+            var rightUpPlayer
+            var rightDownPlayer
             function onYouTubeIframeAPIReady() {
                 leftPlayer = new YT.Player('leftPlayer', {
-                    videoId: '21X5lGlDOfg',
+                    videoId: 'rjb9FdVdX5I',
                     events: {
                         'onReady': onPlayerReady
                     }
                 })
-                rightPlayer = new YT.Player('rightPlayer', {
+                rightUpPlayer = new YT.Player('rightUpPlayer', {
+                    videoId: 'y7W4cwmfcgA',
+                    events: {
+                        'onReady': onPlayerReady
+                    }
+                })
+                rightDownPlayer = new YT.Player('rightDownPlayer', {
                     videoId: 'yn3Kax3mExc',
                     events: {
                         'onReady': onPlayerReady
