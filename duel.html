@@ -1,38 +1,66 @@
 <!DOCTYPE html>
 <html style="width: 100%; height: 100%">
     <body style="width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden">
-        <div id="leftPlayer" style="overflow: hidden; resize: horizontal; height: 100%; width: 66.66%; float: left" height="100%" width="66.66%">Loading left video...</div>
-        <div id="rightUpPlayer" style="overflow: hidden; height: 50%; width: 33.33%; float: right" height="50%" width="33.33%">Loading right video...</div>
-        <div id="rightDownPlayer" style="overflow: hidden; height: 50%; width: 33.33%; float: right" height="50%" width="33.33%">Loading right video...</div>
+        <div id="leftPlayer" style="overflow: hidden; resize: horizontal; height: 100%; width: 66.66%; float: left" height="100%" width="66.66%">
+
+        </div>
+        <div id="rightUpPlayer" style="overflow: hidden; height: 50%; width: 33.33%; float: right" height="50%" width="33.33%">
+            <iframe src="https://www.spacexfm.com/" width="100%" height="100%" frameBorder="0"></iframe>
+        </div>
+        <div id="flightClub" style="overflow: hidden; height: 50%; width: 33.33%; float: right" height="50%" width="33.33%">
+            <iframe src="https://flightclub.io/live" width="100%" height="100%" frameBorder="0"></iframe>
+        </div>
 
         <script>
             var tag = document.createElement('script')
             tag.src = "https://www.youtube.com/iframe_api"
             var firstScriptTag = document.getElementsByTagName('script')[0]
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+
+            var flightClub = document.getElementById('flightClub').innerHTML
+
             var leftPlayer
             var rightUpPlayer
             var rightDownPlayer
+
+            var mode = 0
+            var fmSwitchTime = new Date(2020, 4, 30, 13, 22, 45, 0)
+
             function onYouTubeIframeAPIReady() {
                 leftPlayer = new YT.Player('leftPlayer', {
-                    videoId: 'rjb9FdVdX5I',
+                    videoId: 'bIZsnKGV8TE',
                     events: {
                         'onReady': onPlayerReady
                     }
                 })
-                rightUpPlayer = new YT.Player('rightUpPlayer', {
-                    videoId: 'y7W4cwmfcgA',
-                    events: {
-                        'onReady': onPlayerReady
-                    }
-                })
-                rightDownPlayer = new YT.Player('rightDownPlayer', {
-                    videoId: 'yn3Kax3mExc',
-                    events: {
-                        'onReady': onPlayerReady
-                    }
-                })
+                // rightDownPlayer = new YT.Player('flightClub', {
+                //     videoId: 'oKN73D0OPSQ',
+                //     events: {
+                //         'onReady': onPlayerReady
+                //     }
+                // })
             }
+
+            function getUrlVars() {
+                var vars = {}
+                var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                    vars[key] = value
+                })
+                return vars
+            }
+
+            window.setInterval(function checkTimer() {
+                let currentTime = new Date()
+                if(mode == 0 && currentTime > fmSwitchTime) { // Switch SpaceX FM to mission audio
+                    mode = 1
+                    rightUpPlayer = new YT.Player('rightUpPlayer', {
+                        videoId: 'hxCzpa07dvg',
+                        events: {
+                            'onReady': onPlayerReady
+                        }
+                    })
+                }
+            }, 1000)
 
             function onPlayerReady(event) {
                 event.target.playVideo()
